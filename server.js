@@ -40,6 +40,11 @@ io.on('connection', function(socket) {
 		io.emit('newUserCount', { count: users });
 	});
 
+	socket.on('disconnect', function() {
+		users--;
+		io.emit('newUserCount', { count: users });
+	});
+
 });
 
 server.listen(1337);
