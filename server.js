@@ -30,6 +30,18 @@ router.get('/', function(req, res) {
 	res.render('index');
 });
 
+var chatMessages = [];
+var users = 0;
+
+io.on('connection', function(socket) {
+
+	socket.on('entered', function(data) {
+		users++;
+		io.emit('newUserCount', { count: users });
+	});
+
+});
+
 server.listen(1337);
 
 module.exports = server;
