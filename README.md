@@ -4,6 +4,7 @@ Tech Stack Used:
 - Node.js / Express.js
 - AngularJS
 - Socket.io
+- Gulp
 
 Testing:
 - Should
@@ -12,3 +13,4 @@ Testing:
 Instructions:
 - npm install
 - bower install
+- in the terminal, type: gulp develop to run all tests and run the server via nodemon

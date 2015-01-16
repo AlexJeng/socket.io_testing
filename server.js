@@ -1,11 +1,14 @@
-var express = require('express');
+var express    = require('express');
 var bodyParser = require('body-parser');
-var app = express();
+var app        = express();
+var server     = require('http').Server(app);
+var router     = express.Router();
 
-var server = require('http').Server(app);
-var router = express.Router();
 
+// pass the server to socket.io
 var io = require('socket.io')(server);
+
+// reference the socket.io logic
 var socketIO = require('./socketIO.js')(io);
 
 app.engine('html', require('ejs').renderFile);
