@@ -1,24 +1,32 @@
 <div ng-if="username !== ''">
-	{{ current }} user(s) connected.
-
-	<div>
-		<form name="chatForm" ng-submit='submitMessage(newChatMessage.msg)' novalidate>
-			<div class="form-group">
-				<div class="form-group form-group-md">
-					<div class="input-group input-group-md">
-						<input type="text" name="message" ng-model="newChatMessage.msg" class="form-control floating-label" placeholder="Send a message."/>
-						<span class="input-group-btn">
-							<button type="submit" ng-disabled="submitMessageDisabled()" class="btn btn-default">Send</button>
-						</span>
+	<div class="container">
+		<div class="row">
+			<div>
+				<center>
+					{{ current }} user(s) connected.
+				</center>
+			</div>
+			<br />
+			<div class="col-md-6 col-md-offset-3">
+				<div>
+					<form name="chatForm" ng-submit='submitMessage(newChatMessage.msg)' novalidate>
+						<div class="form-group">
+							<div class="form-group form-group-md">
+								<div class="input-group input-group-md">
+									<input type="text" name="message" ng-model="newChatMessage.msg" class="form-control floating-label" placeholder="Write something!"/>
+									<span class="input-group-btn">
+										<button type="submit" ng-disabled="submitMessageDisabled()" class="btn btn-default">Send</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="chats">
+					<div ng-repeat="chat in chats">
+						{{ chat.user }}: {{ chat.msg }}
 					</div>
 				</div>
 			</div>
-		</form>
-	</div>
-
-	<div class="chats">
-		<div ng-repeat="chat in chats">
-			{{ chat.user }}: {{ chat.msg }}
-		</div>
 	</div>
 </div>

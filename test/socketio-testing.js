@@ -12,6 +12,11 @@ var options = {
 
 describe('socket.IO', function() {
 
+	after(function(done) {
+		server_io.close();
+		done();
+	});
+
 	describe('users entering & leaving rooms', function() {
 
 		it("should notify all users in a room that a new person has joined", function(done) {
