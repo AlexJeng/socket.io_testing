@@ -8,23 +8,30 @@
 			</div>
 			<br />
 			<div class="col-md-6 col-md-offset-3">
-				<div>
+				<div class="formDiv">
 					<form name="chatForm" ng-submit='submitMessage(newChatMessage.msg)' novalidate>
 						<div class="form-group">
 							<div class="form-group form-group-md">
 								<div class="input-group input-group-md">
 									<input type="text" name="message" ng-model="newChatMessage.msg" class="form-control floating-label" placeholder="Write something!"/>
 									<span class="input-group-btn">
-										<button type="submit" ng-disabled="submitMessageDisabled()" class="btn btn-default">Send</button>
+										<button type="submit" ng-disabled="submitMessageDisabled()" class="btn btn-primary">Send</button>
 									</span>
 								</div>
 							</div>
 						</div>
 					</form>
 				</div>
-				<div class="chats">
-					<div ng-repeat="chat in chats">
-						{{ chat.user }}: {{ chat.msg }}
+				<div class="chatDiv">
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Messages
+					</div>
+					<div class="panel-body">
+						<div ng-repeat="chat in chats">
+							{{ chat.user }}: {{ chat.msg }}
+						</div>
 					</div>
 				</div>
 			</div>
