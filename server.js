@@ -4,7 +4,9 @@ var app = express();
 
 var server = require('http').Server(app);
 var router = express.Router();
+
 var io = require('socket.io')(server);
+var socketIO = require('./socketIO.js')(io);
 
 app.engine('html', require('ejs').renderFile);
 
@@ -28,31 +30,6 @@ app.use('/', router);
 // Front End
 router.get('/', function(req, res) {
 	res.render('index');
-});
-
-// Retaining information variables
-var chatMessages = [];
-var users = 0;
-
-// Socket.io logic
-io.on('connection', function(socket) {
-
-	socket.on('entered', function(data) {
-		users++;
-		io.emit('newUserCount', { count: users });
-		io.emit('updatedChats', { msgs: chatMessages });
-	});
-
-	socket.on('disconnect', function() {
-		users--;
-		io.emit('newUserCount', { count: users });
-	});
-
-	socket.on('newChatMessage', function(data) {
-		chatMessages.push(data);
-		io.emit('updatedChats', { msgs: chatMessages});
-	});
-
 });
 
 server.listen(1337);
