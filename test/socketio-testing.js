@@ -38,12 +38,17 @@ describe('socket.IO', function() {
 					client2.emit('entered', { data: null });
 				});
 
+				client2.on('disconnect', function() {
+					client1.on('disconnect', function() {
+						done();
+					});
+				});
+
 				// Listener for new user count
 				client2.on('newUserCount', function(data){
 					data.count.should.equal(2);
 					client2.disconnect();
 					client1.disconnect();
-					done();
 				});
 
 			});
@@ -63,10 +68,13 @@ describe('socket.IO', function() {
 					client2.disconnect();
 				});
 
+				client1.on('disconnect', function() {
+					done();
+				});
+
 				client1.on('newUserCount', function(data){
 					data.count.should.equal(1);
 					client1.disconnect();
-					done();
 				});
 
 			});
@@ -90,7 +98,6 @@ describe('socket.IO', function() {
 					data.msgs[0].msg.should.equal('test');
 					client2.disconnect();
 					client1.disconnect();
-					done();
 				});
 
 				var client2 = client_io.connect(socketURL, options);
@@ -99,6 +106,12 @@ describe('socket.IO', function() {
 
 					// Notifies the server_io with a new chat message
 					client2.emit('newChatMessage', { user: 'justin', msg: 'test'});
+				});
+
+				client2.on('disconnect', function() {
+					client1.on('disconnect', function() {
+						done();
+					});
 				});
 
 			});
